@@ -28,11 +28,20 @@ export async function decryptMetadata(
   const iv = base64urlDecode(metadataIvString);
   const ciphertext = base64urlDecode(encryptedMetadata);
 
-  const plaintext = await crypto.subtle.decrypt(
-    { name: "AES-GCM", iv, tagLength: 128 },
-    key,
-    ciphertext,
-  );
+  let plaintext: ArrayBuffer;
+  try {
+    plaintext = await crypto.subtle.decrypt(
+      { name: "AES-GCM", iv, tagLength: 128 },
+      key,
+      ciphertext,
+    );
+  } catch {
+    throw new Error("Decryption failed. The encryption key may be incorrect.");
+  }
 
-  return JSON.parse(new TextDecoder().decode(plaintext));
+  try {
+    return JSON.parse(new TextDecoder().decode(plaintext));
+  } catch {
+    throw new Error("Failed to parse file metadata. The encryption key may be incorrect.");
+  }
 }

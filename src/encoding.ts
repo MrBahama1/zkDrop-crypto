@@ -11,7 +11,12 @@ export function base64urlEncode(buffer: Uint8Array): string {
 
 /** Decode a URL-safe base64 string to a byte array. */
 export function base64urlDecode(str: string): Uint8Array<ArrayBuffer> {
-  const padded = str.replace(/-/g, "+").replace(/_/g, "/");
+  // Restore standard base64 characters
+  let padded = str.replace(/-/g, "+").replace(/_/g, "/");
+  // Add padding if needed
+  const remainder = padded.length % 4;
+  if (remainder === 2) padded += "==";
+  else if (remainder === 3) padded += "=";
   const binary = atob(padded);
   const buffer = new ArrayBuffer(binary.length);
   const bytes = new Uint8Array(buffer);
