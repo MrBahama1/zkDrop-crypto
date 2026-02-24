@@ -1,0 +1,44 @@
+{
+  "name": "@zkdrop/crypto",
+  "version": "0.1.0",
+  "description": "Zero-knowledge encryption library for zkDrop. AES-256-GCM file encryption that runs entirely in the browser.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  },
+  "keywords": [
+    "encryption",
+    "aes-256-gcm",
+    "zero-knowledge",
+    "e2ee",
+    "end-to-end-encryption",
+    "web-crypto",
+    "file-encryption",
+    "browser-encryption"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrBahama1/zkDrop-crypto"
+  },
+  "homepage": "https://zkdrop.com"
+}
